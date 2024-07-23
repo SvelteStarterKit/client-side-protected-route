@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 
 	let email = '';
+	let password = '';
 	let message = '';
 
 	function formSubmit(event: any) {
@@ -11,7 +12,7 @@
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email })
+			body: JSON.stringify({ email, password })
 		})
 			.then((response) => {
 				if (response.ok) {
@@ -39,6 +40,12 @@
 					placeholder="Email"
 					autocomplete="email"
 				/>
+				<p style="color: red">{message}</p>
+			</label>
+
+			<label>
+				Password
+				<input type="password" bind:value={password} name="password" placeholder="password" />
 				<p style="color: red">{message}</p>
 			</label>
 		</fieldset>
