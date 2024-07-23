@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { clearUserToken, updateUserToken, userToken } from '$lib/auth';
 	import { onDestroy, onMount } from 'svelte';
+	import { clearUserToken, updateUserToken, userToken } from '$lib/auth';
 
 	const unsubPage = page.subscribe((_) => {
 		updateUserToken();
