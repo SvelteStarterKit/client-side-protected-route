@@ -1,45 +1,17 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { onDestroy, onMount } from 'svelte';
-	import { clearUserToken, updateUserToken, userToken } from '$lib/auth';
-
-	const unsubPage = page.subscribe((_) => {
-		updateUserToken();
-	});
-
-	onMount(() => {
-		return userToken.subscribe((token) => {
-			if (token === null) {
-				clearUserToken();
-			} else {
-				fetch('/api/user', {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`
-					}
-				})
-					.then((response) => {
-						if (!response.ok) {
-							clearUserToken();
-						}
-						return response.json();
-					})
-					.then((data) => {
-						console.log(data);
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-			}
-		});
-	});
-
-	onDestroy(() => {
-		unsubPage();
-	});
+	import { clearUserToken } from '$lib/auth';
 </script>
 
-{#if $userToken}
-	<slot />
-{/if}
+<div>
+	<h2>PROTECTED ROUTE</h2>
+	<br />
+	<p><a href="/">Home</a></p>
+	<br />
+	<p><a href="/page2">Page2</a></p>
+	<br />
+	<p><a href="/unauthorized">This page give 401</a></p>
+	<br />
+	<button on:click={clearUserToken}>Logout</button>
+</div>
+
+<slot />
