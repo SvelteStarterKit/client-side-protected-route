@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	let email = '';
-	let password = '';
-	let message = '';
+	let email = $state('');
+	let password = $state('');
+	let message = $state('');
 
 	function formSubmit(event: any) {
 		event.preventDefault();
@@ -29,7 +29,7 @@
 </script>
 
 <div>
-	<form method="post" on:submit={formSubmit}>
+	<form method="post" onsubmit={formSubmit}>
 		<fieldset>
 			<label>
 				Email

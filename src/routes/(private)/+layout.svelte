@@ -1,5 +1,11 @@
 <script lang="ts">
 	import { clearUserToken } from '$lib/auth';
+
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 </script>
 
 <div>
@@ -11,7 +17,7 @@
 	<br />
 	<p><a href="/unauthorized">This page give 401</a></p>
 	<br />
-	<button on:click={clearUserToken}>Logout</button>
+	<button onclick={clearUserToken}>Logout</button>
 </div>
 
-<slot />
+{@render children?.()}

@@ -3,6 +3,12 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { updateUserToken, userToken } from '$lib/auth';
 
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
+
 	const unsubPage = page.subscribe((_) => {
 		updateUserToken();
 	});
@@ -20,4 +26,4 @@
 	});
 </script>
 
-<slot />
+{@render children?.()}
