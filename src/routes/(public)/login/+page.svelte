@@ -37,7 +37,7 @@
 					type="email"
 					bind:value={email}
 					name="email"
-					placeholder="Email"
+					placeholder="admin@example.com"
 					autocomplete="email"
 				/>
 				<p style="color: red">{message}</p>
