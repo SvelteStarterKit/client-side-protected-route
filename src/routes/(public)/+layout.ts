@@ -1,13 +1,10 @@
-import { goto } from '$app/navigation';
 import { userAuth } from '$lib/auth.svelte.js';
 import type { LayoutLoad } from './$types';
 
 export const ssr = false;
 
 export const load: LayoutLoad = async ({ fetch }) => {
-	if (!userAuth.token) {
-		goto('/login');
-	} else {
+	if (userAuth.token) {
 		fetch('/api/user', {
 			method: 'GET',
 			headers: {

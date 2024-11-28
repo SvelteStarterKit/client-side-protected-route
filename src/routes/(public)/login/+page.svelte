@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { userAuth } from '$lib/auth.svelte.js';
 
 	let email = $state('');
 	let password = $state('');
@@ -22,7 +23,7 @@
 				throw new Error('Network response was not ok.');
 			})
 			.then((data) => {
-				localStorage.setItem('token', data.token);
+				userAuth.token = data.token;
 				goto('/');
 			});
 	}
